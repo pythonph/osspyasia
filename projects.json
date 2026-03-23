@@ -1,0 +1,47 @@
+[
+  {
+    "id": "01",
+    "name": "Air",
+    "tag": "Framework",
+    "tagClass": "framework",
+    "description": "A modern, lightweight web framework for Python. Built for simplicity and performance, Air provides an elegant API for building web applications quickly.",
+    "meta": ["Python", "Web Framework", "Feldroy"],
+    "links": {
+      "website": "https://airwebframework.org/",
+      "github": "https://github.com/feldroy/air"
+    }
+  },
+  {
+    "id": "02",
+    "name": "Render Engine",
+    "tag": "Generator",
+    "tagClass": "generator",
+    "description": "A flexible Python-based static site generator. Create beautiful, fast websites with a powerful templating system and plugin architecture.",
+    "meta": ["Python", "Static Sites"],
+    "links": {
+      "github": "https://github.com/render-engine/render-engine"
+    }
+  },
+  {
+    "id": "03",
+    "name": "Organizer Toolkit",
+    "tag": "Tools",
+    "tagClass": "tools",
+    "description": "A collection of tools and resources for organizing Python community events. Built by the Python Software Foundation to help event organizers succeed.",
+    "meta": ["Python", "Community", "PSF"],
+    "links": {
+      "github": "https://github.com/psf/organizer-toolkit"
+    }
+  },
+  {
+    "id": "04",
+    "name": "Cardiff",
+    "tag": "Community",
+    "tagClass": "community",
+    "description": "An open source contribution from the Filipino Python community at Z-California PH. Explore and contribute to this growing project.",
+    "meta": ["Python", "Philippines"],
+    "links": {
+      "github": "https://github.com/zcalifornia-ph/cardiff"
+    }
+  }
+]
