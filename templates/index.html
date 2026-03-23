@@ -7,8 +7,8 @@
         <a href="/" class="nav-brand">Python<span>Asia</span></a>
         <div class="nav-links">
             <a href="#projects">Projects</a>
+            <a href="#contributors">Contributors</a>
             <a href="https://pythonasia.org" target="_blank" rel="noopener">Community</a>
-            <a href="#contribute" class="nav-cta">Submit a Project</a>
         </div>
     </nav>
 
@@ -42,6 +42,9 @@
     </div>
 
     <div class="section-heading" id="projects">
+        <div class="search-container">
+            <input type="text" id="project-search" class="search-input" placeholder="Search projects by name, description, or tag..." aria-label="Search projects">
+        </div>
         <h2>Featured Projects</h2>
         <div class="line"></div>
     </div>
@@ -138,17 +141,84 @@
         </div>
     </section>
 
+    <section class="contributors" id="contributors">
+        <div class="section-heading">
+            <div class="search-container contributors-search">
+                <input type="text" id="contributor-search" class="search-input" placeholder="Search contributors by name..." aria-label="Search contributors">
+            </div>
+            <h2>Meet the Contributors</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="contributors-grid">
+            <div class="contributor-card">
+                <img src="https://avatars.githubusercontent.com/pydanny" alt="Daniel Roy Greenfeld" class="contributor-avatar">
+                <div class="contributor-info">
+                    <h4>Daniel Roy Greenfeld</h4>
+                    <p>Air Framework Co-founder</p>
+                </div>
+            </div>
+            <div class="contributor-card">
+                <img src="https://avatars.githubusercontent.com/audreyfeldroy" alt="Audrey M. Roy Greenfeld" class="contributor-avatar">
+                <div class="contributor-info">
+                    <h4>Audrey M. Roy Greenfeld</h4>
+                    <p>Air Framework Co-founder</p>
+                </div>
+            </div>
+            <div class="contributor-card">
+                <img src="https://avatars.githubusercontent.com/kjaymiller" alt="Jay Miller" class="contributor-avatar">
+                <div class="contributor-info">
+                    <h4>Jay Miller</h4>
+                    <p>Render Engine Lead Developer</p>
+                </div>
+            </div>
+            <div class="contributor-card">
+                <img src="https://avatars.githubusercontent.com/mesrenyamedogbe" alt="Mesrenyame Dogbe" class="contributor-avatar">
+                <div class="contributor-info">
+                    <h4>Mesrenyame Dogbe</h4>
+                    <p>Organizer Toolkit Developer</p>
+                </div>
+            </div>
+            <div class="contributor-card">
+                <img src="https://avatars.githubusercontent.com/MasonEgger" alt="Mason Egger" class="contributor-avatar">
+                <div class="contributor-info">
+                    <h4>Mason Egger</h4>
+                    <p>Organizer Toolkit Developer</p>
+                </div>
+            </div>
+            <div class="contributor-card">
+                <img src="https://avatars.githubusercontent.com/zcalifornia-ph" alt="Zildjian E. California" class="contributor-avatar">
+                <div class="contributor-info">
+                    <h4>Zildjian E. California</h4>
+                    <p>Cardiff Creator</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-form" id="project-form">
+        <div class="section-heading">
+            <h2>Submit Your Project</h2>
+            <div class="line"></div>
+        </div>
+
+        <form id="oss-submission-form" class="submission-form" action="#" method="POST" onsubmit="event.preventDefault(); document.getElementById('submission-text').textContent='Thanks! Submission received.';">
+            <label for="project-name">Project Name</label>
+            <input type="text" id="project-name" name="project-name" placeholder="Your OSS project name" required>
+
+            <label for="project-repo">GitHub Repository URL</label>
+            <input type="url" id="project-repo" name="project-repo" placeholder="https://github.com/owner/repository" required>
+
+            <button type="submit" class="submit-btn">Send Submission</button>
+            <p id="submission-text" class="submission-status">Form is not connected to a backend in this demo.</p>
+        </form>
+    </section>
+
     <section class="contribute" id="contribute">
         <div class="contribute-card">
             <div class="contribute-text">
                 <h2>Share your project</h2>
                 <p>Building something in the open? We want to feature Python open source projects from developers across Asia. Submit yours to be showcased.</p>
-            </div>
-            <div class="contribute-action">
-                <a href="https://github.com/pythonasia" class="contribute-btn" target="_blank" rel="noopener">
-                    Submit a project
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </a>
             </div>
         </div>
     </section>
@@ -158,7 +228,143 @@
         <div class="footer-links">
             <a href="https://pythonasia.org" target="_blank" rel="noopener">PythonAsia</a>
             <a href="#projects">Projects</a>
+            <a href="#contributors">Contributors</a>
         </div>
         <span class="footer-copy">2025 PythonAsia Community</span>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Project search functionality
+            const projectSearchInput = document.getElementById('project-search');
+            const projectCards = document.querySelectorAll('.projects .project-card');
+
+            projectSearchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+
+                projectCards.forEach(card => {
+                    const name = card.querySelector('.project-name').textContent.toLowerCase();
+                    const description = card.querySelector('.project-description').textContent.toLowerCase();
+                    const tags = card.querySelector('.project-tag').textContent.toLowerCase();
+                    const meta = card.querySelector('.project-meta').textContent.toLowerCase();
+
+                    const matches = name.includes(searchTerm) ||
+                                   description.includes(searchTerm) ||
+                                   tags.includes(searchTerm) ||
+                                   meta.includes(searchTerm);
+
+                    card.style.display = matches ? '' : 'none';
+                });
+            });
+
+            // Contributor search functionality
+            const contributorSearchInput = document.getElementById('contributor-search');
+            let contributorCards = document.querySelectorAll('.contributors .contributor-card');
+
+            contributorSearchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+
+                contributorCards.forEach(card => {
+                    const name = card.querySelector('.contributor-info h4').textContent.toLowerCase();
+                    const role = card.querySelector('.contributor-info p').textContent.toLowerCase();
+
+                    const matches = name.includes(searchTerm) || role.includes(searchTerm);
+
+                    card.style.display = matches ? '' : 'none';
+                });
+            });
+
+            // Submission form behavior: add new project + contributor
+            const submissionForm = document.getElementById('oss-submission-form');
+            const projectNameInput = document.getElementById('project-name');
+            const projectRepoInput = document.getElementById('project-repo');
+            const submissionStatus = document.getElementById('submission-text');
+            const projectsGrid = document.querySelector('.projects-grid');
+            const contributorsGrid = document.querySelector('.contributors-grid');
+
+            submissionForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const projectName = projectNameInput.value.trim();
+                const projectRepo = projectRepoInput.value.trim();
+
+                if (!projectName || !projectRepo) {
+                    submissionStatus.textContent = 'Please fill in both fields.';
+                    submissionStatus.style.color = 'red';
+                    return;
+                }
+
+                const repoMatch = projectRepo.match(/^https?:\/\/(?:www\.)?github\.com\/([^\/]+)\/([^\/]+)(?:\/|$)/i);
+                if (!repoMatch) {
+                    submissionStatus.textContent = 'Please provide a valid GitHub repository URL.';
+                    submissionStatus.style.color = 'red';
+                    return;
+                }
+
+                const owner = repoMatch[1];
+                const repo = repoMatch[2];
+                const apiUrl = `https://api.github.com/repos/${owner}/${repo}`;
+
+                fetch(apiUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Unable to fetch repository info.');
+                        }
+                        return response.json();
+                    })
+                    .then(repoData => {
+                        const renderedName = repoData.name || projectName;
+                        const renderedDescription = repoData.description || 'User-submitted project from the community.';
+                        const renderedLanguage = repoData.language || 'Python';
+                        const ownerName = (repoData.owner && repoData.owner.login) ? repoData.owner.login : 'Community Contributor';
+                        const ownerAvatar = (repoData.owner && repoData.owner.avatar_url) ? repoData.owner.avatar_url : 'https://avatars.githubusercontent.com/github';
+
+                        const newProjectCard = document.createElement('article');
+                        newProjectCard.className = 'project-card';
+                        newProjectCard.innerHTML = `
+                            <div class="card-header">
+                                <span class="project-number">${projectsGrid.children.length + 1 < 10 ? '0' + (projectsGrid.children.length + 1) : projectsGrid.children.length + 1}</span>
+                                <span class="project-tag community">Submitted</span>
+                            </div>
+                            <h3 class="project-name">${renderedName}</h3>
+                            <p class="project-description">${renderedDescription}</p>
+                            <div class="project-meta">
+                                <span class="meta-item">${renderedLanguage}</span>
+                                <span class="meta-dot"></span>
+                                <span class="meta-item">${ownerName}</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="${projectRepo}" class="project-link link-github" target="_blank" rel="noopener">
+                                    <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        `;
+                        projectsGrid.appendChild(newProjectCard);
+
+                        const newContributor = document.createElement('div');
+                        newContributor.className = 'contributor-card';
+                        newContributor.innerHTML = `
+                            <img src="${ownerAvatar}" alt="${ownerName}" class="contributor-avatar">
+                            <div class="contributor-info">
+                                <h4>${ownerName}</h4>
+                                <p>${renderedName} maintainer</p>
+                            </div>
+                        `;
+                        contributorsGrid.appendChild(newContributor);
+
+                        contributorCards = document.querySelectorAll('.contributors .contributor-card');
+                        submissionStatus.textContent = 'Thanks! Your project has been added to Featured Projects and Contributors.';
+                        submissionStatus.style.color = 'var(--indigo)';
+                        projectNameInput.value = '';
+                        projectRepoInput.value = '';
+                    })
+                    .catch(error => {
+                        submissionStatus.textContent = 'Could not locate repository details. Ensure URL is valid and public.';
+                        submissionStatus.style.color = 'red';
+                        console.error(error);
+                    });
+            });
+        });
+    </script>
 {% endblock %}
