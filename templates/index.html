@@ -1,4 +1,7 @@
-{% extends "base.html" %} {% block title %}PythonAsia Open Source{% endblock %}
+{% extends "base.html" %}
+
+{% block title %}PythonAsia Open Source{% endblock %}
+
 {% block content %}
 <nav id="nav">
   <a href="/" class="nav-brand">Python<span>Asia</span></a>
@@ -58,162 +61,47 @@
 
 <section class="projects">
   <div class="projects-grid" id="projects-container">
+    {% for project in projects %}
     <article class="project-card">
       <div class="card-header">
-        <span class="project-number">01</span>
-        <span class="project-tag framework">Framework</span>
+        <span class="project-number">{{ project.id }}</span>
+        <span class="project-tag {{ project.tagClass }}">{{ project.tag }}</span>
       </div>
-      <h3 class="project-name">Air</h3>
-      <p class="project-description">
-        A modern, lightweight web framework for Python. Built for simplicity and
-        performance, Air provides an elegant API for building web applications
-        quickly.
-      </p>
+      <h3 class="project-name">{{ project.name }}</h3>
+      <p class="project-description">{{ project.description }}</p>
       <div class="project-meta">
-        <span class="meta-item">Python</span>
+        {% for item in project.meta %}
+        <span class="meta-item">{{ item }}</span>
+        {% if not loop.last %}
         <span class="meta-dot"></span>
-        <span class="meta-item">Web Framework</span>
-        <span class="meta-dot"></span>
-        <span class="meta-item">Feldroy</span>
+        {% endif %} {% endfor %}
       </div>
       <div class="project-links">
+        {% if project.links.website %}
         <a
-          href="https://airwebframework.org/"
+          href="{{ project.links.website }}"
           class="project-link link-website"
           target="_blank"
           rel="noopener"
         >
-          <svg
-            class="link-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M2 12h20" />
-            <path
-              d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-            />
-          </svg>
+          <i class="ph ph-globe" style="font-size: 18px"></i>
           Website
         </a>
+        {% endif %}
+        {% if project.links.github %}
         <a
-          href="https://github.com/feldroy/air"
+          href="{{ project.links.github }}"
           class="project-link link-github"
           target="_blank"
           rel="noopener"
         >
-          <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"
-            />
-          </svg>
+          <i class="ph ph-github-logo" style="font-size: 18px"></i>
           GitHub
         </a>
+        {% endif %}
       </div>
     </article>
-
-    <article class="project-card">
-      <div class="card-header">
-        <span class="project-number">02</span>
-        <span class="project-tag generator">Generator</span>
-      </div>
-      <h3 class="project-name">Render Engine</h3>
-      <p class="project-description">
-        A flexible Python-based static site generator. Create beautiful, fast
-        websites with a powerful templating system and plugin architecture.
-      </p>
-      <div class="project-meta">
-        <span class="meta-item">Python</span>
-        <span class="meta-dot"></span>
-        <span class="meta-item">Static Sites</span>
-      </div>
-      <div class="project-links">
-        <a
-          href="https://github.com/render-engine/render-engine"
-          class="project-link link-github"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"
-            />
-          </svg>
-          GitHub
-        </a>
-      </div>
-    </article>
-
-    <article class="project-card">
-      <div class="card-header">
-        <span class="project-number">03</span>
-        <span class="project-tag tools">Tools</span>
-      </div>
-      <h3 class="project-name">Organizer Toolkit</h3>
-      <p class="project-description">
-        A collection of tools and resources for organizing Python community
-        events. Built by the Python Software Foundation to help event organizers
-        succeed.
-      </p>
-      <div class="project-meta">
-        <span class="meta-item">Python</span>
-        <span class="meta-dot"></span>
-        <span class="meta-item">Community</span>
-        <span class="meta-dot"></span>
-        <span class="meta-item">PSF</span>
-      </div>
-      <div class="project-links">
-        <a
-          href="https://github.com/psf/organizer-toolkit"
-          class="project-link link-github"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"
-            />
-          </svg>
-          GitHub
-        </a>
-      </div>
-    </article>
-
-    <article class="project-card">
-      <div class="card-header">
-        <span class="project-number">04</span>
-        <span class="project-tag community">Community</span>
-      </div>
-      <h3 class="project-name">Cardiff</h3>
-      <p class="project-description">
-        An open source contribution from the Filipino Python community at
-        Z-California PH. Explore and contribute to this growing project.
-      </p>
-      <div class="project-meta">
-        <span class="meta-item">Python</span>
-        <span class="meta-dot"></span>
-        <span class="meta-item">Philippines</span>
-      </div>
-      <div class="project-links">
-        <a
-          href="https://github.com/zcalifornia-ph/cardiff"
-          class="project-link link-github"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"
-            />
-          </svg>
-          GitHub
-        </a>
-      </div>
-    </article>
+    {% endfor %}
   </div>
 </section>
 
